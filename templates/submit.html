@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Submit Project — AlphaX Heros{% endblock %}
+{% block meta_description %}Submit your project details and let AlphaX Heros turn your ideas into reality. We review every submission within 24 hours.{% endblock %}
+{% block content %}
+
+<section class="section pt-nav">
+  <div class="container max-w-720">
+
+    <!-- Header -->
+    <div class="text-center reveal mb-3xl">
+      <span class="section-label justify-center-flex">Project Intake Form</span>
+      <h1 class="section-title">Submit Your <span class="gradient-text">Project</span></h1>
+      <p class="section-subtitle max-w-500">Tell us everything about your project. Our team reviews every submission within 24 hours.</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="contact-form-card reveal p-2xl">
+      <form method="POST" action="/submit" enctype="multipart/form-data">
+
+        <!-- Section 1: Personal Info -->
+        <div class="form-section-header">
+          <div class="form-section-num">01</div>
+          <span class="form-section-title">Personal Information</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Full Name <span class="required">*</span></label>
+          <input type="text" name="name" required value="{{ form.get('name','') }}" placeholder="John Doe" class="form-input" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email Address <span class="required">*</span></label>
+            <input type="email" name="email" required value="{{ form.get('email','') }}" placeholder="john@example.com" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number <span class="required">*</span></label>
+            <input type="tel" name="phone" required value="{{ form.get('phone','') }}" placeholder="+1 234 567 8900" class="form-input" />
+          </div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <!-- Section 2: Project Details -->
+        <div class="form-section-header">
+          <div class="form-section-num">02</div>
+          <span class="form-section-title">Project Details</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="project_type">Project Type <span class="required">*</span></label>
+          <select name="project_type" id="project_type" required class="form-input">
+            <option value="" disabled {% if not form.get('project_type') %}selected{% endif %}>Select project type...</option>
+            {% for t in ["Website","App","AI Project","Hardware Project","Final Year Project","Editing"] %}
+            <option value="{{ t }}" {% if form.get('project_type') == t %}selected{% endif %}>{{ t }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Project Description <span class="required">*</span></label>
+          <textarea name="description" required rows="5" placeholder="Describe your project in detail — goals, features, tech preferences, target audience..." class="form-input">{{ form.get('description','') }}</textarea>
+        </div>
+
+        <hr class="form-divider" />
+
+        <!-- Section 3: Budget & Timeline -->
+        <div class="form-section-header">
+          <div class="form-section-num">03</div>
+          <span class="form-section-title">Budget & Timeline</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="budget">Budget Range</label>
+            <select name="budget" id="budget" class="form-input">
+              <option value="">Not specified</option>
+              {% for b in ["Under $500","$500 – $1,000","$1,000 – $5,000","$5,000 – $10,000","$10,000+","Let's Discuss"] %}
+              <option value="{{ b }}" {% if form.get('budget') == b %}selected{% endif %}>{{ b }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="deadline">Preferred Deadline</label>
+            <input type="date" name="deadline" id="deadline" value="{{ form.get('deadline','') }}" class="form-input" />
+          </div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <!-- Section 4: File Upload -->
+        <div class="form-section-header">
+          <div class="form-section-num">04</div>
+          <span class="form-section-title">Attachments <span class="form-hint">(optional)</span></span>
+        </div>
+
+        <div class="form-group">
+          <div class="file-upload-area" id="drop-zone">
+            <div class="upload-icon">📎</div>
+            <p class="upload-text">Drop your file here or click to browse</p>
+            <p class="upload-hint">PDF · DOC · DOCX · PNG · JPG · ZIP · TXT — Max 10MB</p>
+            <p id="file-name" class="file-name-preview hidden"></p>
+          </div>
+          <input type="file" name="file" id="file-input" class="hidden" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.zip,.txt" title="Upload project files" />
+        </div>
+
+        <!-- Submit -->
+        <div class="pt-md">
+          <button type="submit" class="btn btn-primary btn-lg w-full">
+            <span>🚀 Submit Project Request</span>
+          </button>
+          <p class="text-center text-muted text-small mt-md">
+            By submitting you agree to our terms · We respond within 24 hours
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

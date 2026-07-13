@@ -1,0 +1,442 @@
+{% extends "base.html" %} {% block title %}AlphaX Heros — We Build Tomorrow{%
+endblock %} {% block content %}
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     HERO SECTION
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-gradient-shift"></div>
+  <div class="hero-grid-decoration"></div>
+  <div class="hero-visual" data-depth="0.12" aria-hidden="true">
+    <div class="hero-visual-core"></div>
+    <div class="hero-visual-ring hero-visual-ring-1"></div>
+    <div class="hero-visual-ring hero-visual-ring-2"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge hero-anim-1">
+      <span class="pulse-dot"></span>
+      Available for New Projects
+    </div>
+
+    <h1 class="hero-title hero-anim-2">
+      Empower Ideas,<br />
+      <span class="gradient-text-hero">Build the Future</span>
+      <span class="hero-typed-line">
+        <span
+          data-typing-headline="AI Automation, Digital Transformation, Intelligent Web Systems"
+        ></span>
+        <span class="typing-cursor"></span>
+      </span>
+    </h1>
+
+    <p class="hero-subtitle hero-anim-3">
+      We craft
+      <strong class="text-accent-light">full-stack digital solutions</strong>
+      from web to app — smart, secure, scalable. Transform your vision into
+      <span
+        data-typing="powerful applications, stunning websites, intelligent AI solutions, innovative hardware"
+        class="text-accent-light font-semibold"
+      ></span
+      ><span class="typing-cursor"></span>
+    </p>
+
+    <div class="hero-actions hero-anim-4">
+      <a href="/submit" class="btn btn-primary btn-lg cta-glow magnetic" data-magnetic>
+        <span>🚀 Launch Your Project</span>
+      </a>
+      <a href="#services" class="btn btn-outline btn-lg magnetic" data-magnetic>
+        <span>Explore Services</span>
+        <span class="btn-icon">↓</span>
+      </a>
+    </div>
+    <div class="hero-quick-call hero-anim-4">
+      <button
+        type="button"
+        class="btn btn-ghost btn-lg magnetic"
+        data-magnetic
+        data-modal-target="quick-brief-modal"
+      >
+        <span>Book Strategy Call</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     TRUST BAR / STATS
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid reveal">
+      <div class="stat-item">
+        <div class="stat-value" data-counter data-target="50+">0+</div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" data-counter data-target="98%">0%</div>
+        <div class="stat-label">Client Satisfaction</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">24/7</div>
+        <div class="stat-label">Support Available</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" data-counter data-target="3+">0+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SERVICES
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">
+        Our <span class="gradient-text">Services</span>
+      </h2>
+      <p class="section-subtitle">
+        We deliver end-to-end digital solutions crafted with precision,
+        creativity, and cutting-edge technology.
+      </p>
+    </div>
+
+    <div class="services-grid stagger mt-3xl">
+      {% set services = [ ("🌐", "Website Development", "Modern, responsive
+      websites with cutting-edge UI/UX. From landing pages to complex portals —
+      built for performance and conversion.", "tint-indigo"), ("📱", "App
+      Development", "Native and cross-platform mobile applications built for
+      performance, scale, and delightful user experiences.", "tint-cyan"),
+      ("🤖", "AI Projects", "Machine learning models, chatbots, NLP systems, and
+      intelligent automation solutions powered by latest AI.", "tint-violet"),
+      ("⚡", "Hardware Projects", "IoT devices, embedded systems, sensor
+      networks, and custom hardware prototyping for innovative products.",
+      "tint-amber"), ("🎓", "Final Year Projects", "Complete academic projects
+      with documentation, presentations, and one-on-one guidance for engineering
+      students.", "tint-emerald"), ("🎬", "Video Editing", "Professional editing
+      for marketing campaigns, social media content, and corporate
+      productions.", "tint-rose") ] %} {% for icon, title, desc, tint_class in
+      services %}
+      <div class="card reveal">
+        <div class="card-icon {{ tint_class }}">
+          <span class="text-xl-icon">{{ icon }}</span>
+        </div>
+        <h3 class="card-title">{{ title }}</h3>
+        <p class="card-desc">{{ desc }}</p>
+        <div class="card-link">Learn More <span>→</span></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     ABOUT SECTION
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section id="about" class="section bg-secondary">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-content reveal-left">
+        <span class="section-label">About Us</span>
+        <h3>
+          A Team of Passionate
+          <span class="gradient-text">Creators & Engineers</span>
+        </h3>
+        <p>
+          We are a collective of developers, designers, and digital strategists
+          who combine technical expertise with creative vision. Our mission is
+          to empower businesses and individuals with technology that makes a
+          real difference.
+        </p>
+        <p>
+          Every project we take on receives our full commitment — from initial
+          consultation through deployment and beyond. We don't just write code;
+          we build solutions that drive growth.
+        </p>
+
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon">🎯</div>
+            <div class="about-feature-text">
+              <h4>Goal-Oriented</h4>
+              <p>Solutions aligned with your business objectives</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">⚡</div>
+            <div class="about-feature-text">
+              <h4>Fast Delivery</h4>
+              <p>Rapid development without compromising quality</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">🛡️</div>
+            <div class="about-feature-text">
+              <h4>Secure & Scalable</h4>
+              <p>Built with security and growth in mind</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">💬</div>
+            <div class="about-feature-text">
+              <h4>24/7 Support</h4>
+              <p>We're here whenever you need us</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-badges reveal-right">
+        <div class="about-badge">
+          <div class="about-badge-icon">🏆</div>
+          <div class="about-badge-value">50+</div>
+          <div class="about-badge-label">Projects Completed</div>
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-icon">👥</div>
+          <div class="about-badge-value">40+</div>
+          <div class="about-badge-label">Happy Clients</div>
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-icon">🌍</div>
+          <div class="about-badge-value">5+</div>
+          <div class="about-badge-label">Countries Served</div>
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-icon">⭐</div>
+          <div class="about-badge-value">4.9</div>
+          <div class="about-badge-label">Average Rating</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     HOW IT WORKS
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section id="process" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Our Process</span>
+      <h2 class="section-title">
+        How It <span class="gradient-text">Works</span>
+      </h2>
+      <p class="section-subtitle">
+        From idea to launch in four simple steps — transparent, efficient, and
+        collaborative.
+      </p>
+    </div>
+
+    <div class="process-steps mt-3xl">
+      <div class="process-line"></div>
+
+      {% set steps = [ ("01", "Submit Your Project", "Fill out our detailed
+      project form with your requirements, budget, and timeline. Share any
+      references or documents that help us understand your vision."), ("02",
+      "Discovery & Planning", "Our team reviews your submission and reaches out
+      within 24 hours for a discovery call. We assess feasibility, define scope,
+      and create a detailed project roadmap."), ("03", "Development & Updates",
+      "We build your project using industry best practices with regular progress
+      updates, milestone check-ins, and iterative feedback loops."), ("04",
+      "Delivery & Support", "We deploy your project, provide thorough
+      documentation, and offer ongoing support to ensure everything runs
+      smoothly post-launch.") ] %} {% for num, title, desc in steps %}
+      <div class="process-step reveal">
+        <div class="process-number">{{ num }}</div>
+        <div class="process-content">
+          <h4>{{ title }}</h4>
+          <p>{{ desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     TESTIMONIALS
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section id="testimonials" class="section bg-secondary">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Testimonials</span>
+      <h2 class="section-title">
+        What Our <span class="gradient-text">Clients Say</span>
+      </h2>
+      <p class="section-subtitle">
+        Don't just take our word for it — hear from the people we've worked
+        with.
+      </p>
+    </div>
+
+    <div class="testimonials-grid stagger mt-3xl">
+      {% set testimonials = [ ("Rahul K.", "Startup Founder", "RK", "AlphaX
+      Heros transformed our rough idea into a polished, production-ready
+      application. Their technical expertise and attention to detail exceeded
+      our expectations. Highly recommended!", "★★★★★"), ("Priya M.", "Project
+      Manager", "PM", "The team delivered our e-commerce platform in record time
+      without compromising on quality. Their communication throughout the
+      project was exceptional and transparent.", "★★★★★"), ("Arjun S.",
+      "Engineering Student", "AS", "Got my final year project done with complete
+      documentation and a working demo. The guidance I received was invaluable —
+      they helped me understand every component thoroughly.", "★★★★★") ] %} {%
+      for name, role, initials, text, stars in testimonials %}
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">{{ stars }}</div>
+        <p class="testimonial-text">"{{ text }}"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">{{ initials }}</div>
+          <div>
+            <div class="testimonial-name">{{ name }}</div>
+            <div class="testimonial-role">{{ role }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     CONTACT SECTION
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- Info Side -->
+      <div class="contact-info reveal-left">
+        <span class="section-label">Get In Touch</span>
+        <h3>
+          Let's <span class="gradient-text">Talk</span> About Your Project
+        </h3>
+        <p>
+          Have an idea? Need a quote? Just want to chat about technology? Reach
+          out and we'll get back to you within 24 hours.
+        </p>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📧</div>
+          <div class="contact-detail-text">
+            <h4>Email</h4>
+            <p>hello@alphaxheros.com</p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📱</div>
+          <div class="contact-detail-text">
+            <h4>Phone</h4>
+            <p>+1 (234) 567-890</p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div class="contact-detail-text">
+            <h4>Location</h4>
+            <p>Chennai, India</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Side -->
+      <div class="contact-form-card reveal-right">
+        <form id="contact-form" method="POST" action="/contact">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label"
+                >Your Name <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                name="name"
+                required
+                placeholder="John Doe"
+                class="form-input"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label"
+                >Email Address <span class="required">*</span></label
+              >
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="john@example.com"
+                class="form-input"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="+1 234 567 890"
+                class="form-input"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subject</label>
+              <input
+                type="text"
+                name="subject"
+                placeholder="Project inquiry"
+                class="form-input"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label"
+              >Your Message <span class="required">*</span></label
+            >
+            <textarea
+              name="message"
+              required
+              rows="5"
+              placeholder="Tell us about your project or ask any questions..."
+              class="form-input"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg w-full">
+            <span>Send Message</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     CTA BANNER
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="cta-banner reveal">
+      <span class="section-label justify-center-flex">Ready to Start?</span>
+      <h2>Got a <span class="gradient-text">Project Idea?</span></h2>
+      <p>
+        Let's build something extraordinary together. Tell us about your vision
+        and we'll bring it to life.
+      </p>
+      <a href="/submit" class="btn btn-primary btn-lg">
+        <span>Start Your Project →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

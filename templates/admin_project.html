@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project #{{ project.id }} — AlphaX Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --neon-blue: #00d4ff;
+        --neon-purple: #7c3aed;
+        --neon-green: #00ff88;
+        --bg-dark: #020408;
+        --glass-bg: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(0, 212, 255, 0.12);
+      }
+      body {
+        font-family: "Rajdhani", sans-serif;
+        background: var(--bg-dark);
+        color: #e2e8f0;
+      }
+      .font-display {
+        font-family: "Orbitron", monospace;
+      }
+      .font-mono-tech {
+        font-family: "Share Tech Mono", monospace;
+      }
+      .grad-text {
+        background: linear-gradient(135deg, #00d4ff, #7c3aed, #00ff88);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .glass {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+      }
+      .neon-text {
+        color: var(--neon-blue);
+        text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+      }
+      .grid-bg {
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(0, 212, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 212, 255, 0.02) 1px, transparent 1px);
+        background-size: 50px 50px;
+        pointer-events: none;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 14px;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-family: "Share Tech Mono", monospace;
+        font-weight: 700;
+        border: 1px solid transparent;
+      }
+      .status-pending {
+        background: rgba(251, 191, 36, 0.1);
+        color: #fbbf24;
+        border-color: rgba(251, 191, 36, 0.3);
+      }
+      .status-inprogress {
+        background: rgba(0, 212, 255, 0.1);
+        color: #00d4ff;
+        border-color: rgba(0, 212, 255, 0.3);
+      }
+      .status-completed {
+        background: rgba(0, 255, 136, 0.1);
+        color: #00ff88;
+        border-color: rgba(0, 255, 136, 0.3);
+      }
+
+      .form-select {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(0, 212, 255, 0.15);
+        color: #e2e8f0;
+        transition: all 0.3s;
+      }
+      .form-select:focus {
+        outline: none;
+        border-color: var(--neon-blue);
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.1);
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 212, 255, 0.2);
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen p-6 overflow-x-hidden">
+    <div class="grid-bg"></div>
+    <div class="relative z-10 max-w-5xl mx-auto">
+      <!-- Back + Header -->
+      <div
+        class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10"
+      >
+        <div class="flex items-center gap-6">
+          <a
+            href="/admin/dashboard"
+            class="glass w-12 h-12 rounded-2xl flex items-center justify-center text-slate-400 hover:text-cyan-400 border border-cyan-900/30 hover:border-cyan-500 transition-all shadow-lg group"
+            aria-label="Back to Dashboard"
+          >
+            <svg
+              class="w-6 h-6 transition-transform group-hover:-translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+          </a>
+          <div>
+            <h1
+              class="font-display text-2xl font-black text-white tracking-tight uppercase"
+            >
+              Stream Point <span class="neon-text">#{{ project.id }}</span>
+            </h1>
+            <p
+              class="font-mono-tech text-[10px] text-slate-500 tracking-[0.3em] uppercase mt-1"
+            >
+              // DATA INSPECTION TERMINAL
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          {% if project.status == 'Pending' %}
+          <span class="badge status-pending animate-pulse">⏳ PENDING</span>
+          {% elif project.status == 'In Progress' %}
+          <span class="badge status-inprogress">⚡ IN PROGRESS</span>
+          {% else %}
+          <span class="badge status-completed">✅ COMPLETED</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Flash -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="mb-8 space-y-3">
+        {% for cat, msg in messages %}
+        <div
+          class="rounded-2xl px-6 py-4 text-sm font-bold glass flex items-center gap-3 {% if cat == 'success' %}border-emerald-500/30 text-emerald-400 bg-emerald-500/5{% else %}border-rose-500/30 text-rose-400 bg-rose-500/5{% endif %}"
+        >
+          <div class="w-2 h-2 rounded-full bg-current animate-pulse"></div>
+          {{ msg }}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- MAIN DATA COLUMN -->
+        <div class="lg:col-span-8 space-y-8">
+          <!-- Client Identity -->
+          <div class="glass rounded-[2rem] p-8 relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full -translate-y-16 translate-x-16 blur-3xl"
+            ></div>
+            <h2
+              class="font-display text-[10px] font-black text-cyan-400 tracking-[0.4em] uppercase mb-8 flex items-center gap-3"
+            >
+              <span class="w-2 h-1 bg-cyan-400"></span> Client Identity
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {% macro field(label, val, sub=none) %}
+              <div class="space-y-1">
+                <label
+                  class="font-mono-tech text-[10px] text-slate-500 tracking-widest uppercase"
+                  >{{ label }}</label
+                >
+                <div class="font-bold text-lg text-white">
+                  {{ val or '---' }}
+                </div>
+                {% if sub %}
+                <div class="text-xs text-slate-500 font-mono-tech uppercase">
+                  {{ sub }}
+                </div>
+                {% endif %}
+              </div>
+              {% endmacro %} {{ field("Full Legal Name", project.name, "VERIFIED
+              IDENTITY") }} {{ field("Contact Stream", project.email, "ENCRYPTED
+              EMAIL") }} {{ field("Transmission Line", project.phone, "SECURE
+              COMMS") }} {{ field("Project Matrix", project.project_type,
+              "MODULE TYPE") }}
+            </div>
+          </div>
+
+          <!-- Project Objective -->
+          <div
+            class="glass rounded-[2rem] p-8 border-l-2 border-l-purple-500/30"
+          >
+            <h2
+              class="font-display text-[10px] font-black text-purple-400 tracking-[0.4em] uppercase mb-6"
+            >
+              PROJECT OBJECTIVE
+            </h2>
+            <div class="p-6 glass bg-white/5 rounded-2xl">
+              <p
+                class="text-slate-300 leading-relaxed font-medium whitespace-pre-wrap"
+              >
+                {{ project.description }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Financials & Deadlines -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+              class="glass rounded-[2rem] p-8 flex items-center justify-between border border-emerald-500/10 hover:border-emerald-500/30 transition-all"
+            >
+              <div class="space-y-1">
+                <label
+                  class="font-mono-tech text-[10px] text-slate-500 tracking-widest uppercase"
+                  >Investment</label
+                >
+                <div class="font-display text-xl font-black text-emerald-400">
+                  {{ project.budget or 'TBD' }}
+                </div>
+              </div>
+              <div class="text-3xl opacity-20">💰</div>
+            </div>
+            <div
+              class="glass rounded-[2rem] p-8 flex items-center justify-between border border-amber-500/10 hover:border-amber-500/30 transition-all"
+            >
+              <div class="space-y-1">
+                <label
+                  class="font-mono-tech text-[10px] text-slate-500 tracking-widest uppercase"
+                  >Target Vector</label
+                >
+                <div
+                  class="font-display text-xl font-black text-amber-400 uppercase tracking-tighter"
+                >
+                  {{ project.deadline or 'TBD' }}
+                </div>
+              </div>
+              <div class="text-3xl opacity-20">🎯</div>
+            </div>
+          </div>
+
+          <!-- Transmission Logs (File) -->
+          <div class="glass rounded-[2rem] p-8">
+            <h2
+              class="font-display text-[10px] font-black text-cyan-400 tracking-[0.4em] uppercase mb-6"
+            >
+              TRANSMISSION ASSETS
+            </h2>
+            {% if project.file_path %}
+            <div
+              class="group flex items-center justify-between p-4 glass bg-cyan-900/5 border border-cyan-900/20 rounded-2xl hover:bg-cyan-900/10 transition-all"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-12 rounded-xl flex items-center justify-center bg-cyan-500/10 text-cyan-400 text-2xl"
+                >
+                  📎
+                </div>
+                <div>
+                  <div class="font-bold text-white text-sm tracking-wide">
+                    {{ project.file_path }}
+                  </div>
+                  <div class="font-mono-tech text-[10px] text-slate-600">
+                    ENCRYPTED ATTACHMENT
+                  </div>
+                </div>
+              </div>
+              <a
+                href="/uploads/{{ project.file_path }}"
+                target="_blank"
+                class="px-6 py-2 rounded-xl bg-white/5 text-[10px] font-black tracking-widest text-white hover:bg-cyan-500 hover:text-black transition-all uppercase"
+              >
+                Download
+              </a>
+            </div>
+            {% else %}
+            <div class="p-8 text-center glass bg-slate-900/20 rounded-2xl">
+              <p
+                class="text-slate-600 font-mono-tech text-xs tracking-[0.2em] uppercase"
+              >
+                NO EXTERNAL ASSETS DETECTED
+              </p>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- SIDEBAR CONTROLS -->
+        <div class="lg:col-span-4 space-y-8">
+          <!-- Status Modification -->
+          <div class="glass rounded-[2rem] p-8 border-t-2 border-t-cyan-500/30">
+            <h2
+              class="font-display text-[10px] font-black text-cyan-400 tracking-[0.4em] uppercase mb-6 text-center"
+            >
+              Update Matrix
+            </h2>
+            <form
+              method="POST"
+              action="/admin/project/{{ project.id }}/status"
+              class="space-y-6"
+            >
+              <div class="relative">
+                <select
+                  name="status"
+                  class="form-select w-full rounded-2xl px-5 py-4 text-sm font-bold appearance-none bg-white/5 border-cyan-900/30"
+                  aria-label="Project Status"
+                >
+                  {% for s in ["Pending","In Progress","Completed"] %}
+                  <option
+                    value="{{ s }}"
+                    {%
+                    if
+                    project.status=""
+                    ="s"
+                    %}selected{%
+                    endif
+                    %}
+                    class="bg-slate-900"
+                  >
+                    {{ s }}
+                  </option>
+                  {% endfor %}
+                </select>
+                <div
+                  class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500 italic text-xs"
+                >
+                  ⌄
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="w-full py-4 rounded-2xl text-sm font-black text-black bg-gradient-to-r from-[#00d4ff] to-[#0099cc] shadow-[0_0_20px_rgba(0,212,255,0.3)] hover:shadow-[0_0_30px_rgba(0,212,255,0.5)] transform hover:-translate-y-0.5 transition-all uppercase tracking-widest"
+              >
+                SYNC STATUS
+              </button>
+            </form>
+          </div>
+
+          <!-- Meta Snapshot -->
+          <div class="glass rounded-[2rem] p-8 space-y-6">
+            <h2
+              class="font-display text-[10px] font-black text-slate-500 tracking-[0.4em] uppercase"
+            >
+              SYSTEM META
+            </h2>
+            <div class="space-y-4">
+              <div
+                class="flex justify-between items-center border-b border-white/5 pb-4"
+              >
+                <span
+                  class="font-mono-tech text-[10px] text-slate-600 tracking-widest"
+                  >SUBMITTED</span
+                >
+                <span class="text-xs font-bold text-white"
+                  >{{ project.created_at[:16] if project.created_at else '---'
+                  }}</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <span
+                  class="font-mono-tech text-[10px] text-slate-600 tracking-widest"
+                  >NODE REF</span
+                >
+                <span class="text-xs font-bold neon-text font-mono-tech"
+                  >#{{ project.id }}</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- System Purge (Delete) -->
+          <div class="glass rounded-[2rem] p-8 border border-rose-500/10">
+            <h2
+              class="font-display text-[10px] font-black text-rose-500 tracking-[0.4em] uppercase mb-3"
+            >
+              DANGER ZONE
+            </h2>
+            <p
+              class="text-slate-500 text-[10px] mb-6 font-mono-tech leading-relaxed uppercase tracking-wider"
+            >
+              Purging this entry will result in permanent data loss from the
+              main project stream.
+            </p>
+            <form
+              method="POST"
+              action="/admin/project/{{ project.id }}/delete"
+              onsubmit="return confirm('Initiate System Purge for Node #{{ project.id }}? This cannot be reversed.')"
+            >
+              <button
+                type="submit"
+                class="w-full py-4 rounded-2xl text-[10px] font-black text-rose-500 bg-rose-500/5 border border-rose-500/30 hover:bg-rose-500/10 hover:border-rose-500 transition-all uppercase tracking-[0.2em]"
+              >
+                PURGE ENTRY
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

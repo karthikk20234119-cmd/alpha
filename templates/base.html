@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}AlphaX Heros — We Build Tomorrow{% endblock %}
+    </title>
+    <meta
+      name="description"
+      content="{% block meta_description %}AlphaX Heros delivers cutting-edge digital solutions — from web & app development to AI-powered applications and hardware prototypes.{% endblock %}"
+    />
+    <meta
+      name="keywords"
+      content="web development, app development, AI projects, hardware prototyping, digital solutions, AlphaX Heros"
+    />
+    <meta property="og:title" content="AlphaX Heros — We Build Tomorrow" />
+    <meta
+      property="og:description"
+      content="Transform your ideas into powerful digital solutions with AlphaX Heros."
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Design System -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body class="is-loading">
+    <!-- Premium Motion Layers -->
+    <div class="cursor-spotlight" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="page-transition-layer" aria-hidden="true"></div>
+
+    <div class="page-loader" id="page-loader" aria-hidden="true">
+      <div class="loader-core"></div>
+      <div class="loader-ring"></div>
+      <p>Initializing AlphaXHeros</p>
+    </div>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress">
+      <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+    </div>
+
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-gradient-glow"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="container flex items-center justify-between">
+        <a href="/" class="nav-brand">
+          <div class="nav-brand-icon">αX</div>
+          <span class="gradient-text">ALPHAX HEROS</span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <ul class="nav-links">
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#process">Process</a></li>
+          <li><a href="/#testimonials">Testimonials</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-cta">
+          <a href="/submit" class="btn btn-primary btn-sm magnetic" data-magnetic>
+            <span>Launch Project</span>
+            <span class="btn-icon">→</span>
+          </a>
+        </div>
+
+        <!-- Mobile Toggle -->
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="/#services">Services</a>
+        <a href="/#about">About</a>
+        <a href="/#process">Process</a>
+        <a href="/#testimonials">Testimonials</a>
+        <a href="/#contact">Contact</a>
+        <a href="/submit" class="text-accent-light font-bold"
+          >Launch Project →</a
+        >
+      </div>
+    </nav>
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <div class="flash-container">
+      {% for cat, msg in messages %}
+      <div class="alert alert-{{ cat }}" data-auto-dismiss>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          {% if cat == 'success' %}
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd"
+          />
+          {% else %}
+          <path
+            fill-rule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+            clip-rule="evenodd"
+          />
+          {% endif %}
+        </svg>
+        <span>{{ msg }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+
+    <!-- Main Content -->
+    <main class="site-main">{% block content %}{% endblock %}</main>
+
+    <div
+      class="modal"
+      id="quick-brief-modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="quick-brief-title"
+    >
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-panel">
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">
+          &times;
+        </button>
+        <p class="modal-label">Discovery Call</p>
+        <h3 id="quick-brief-title">Book a 15-minute Strategy Session</h3>
+        <p>
+          Share your product vision, constraints, and target timeline. We will map a practical
+          AI and web roadmap in one focused call.
+        </p>
+        <div class="modal-actions">
+          <a href="/submit" class="btn btn-primary magnetic" data-magnetic>
+            <span>Start Project Brief</span>
+          </a>
+          <button type="button" class="btn btn-outline" data-modal-close>
+            <span>Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Brand -->
+          <div class="footer-brand">
+            <a href="/" class="nav-brand mb-0">
+              <div class="nav-brand-icon">αX</div>
+              <span class="gradient-text">ALPHAX HEROS</span>
+            </a>
+            <p>
+              We transform ideas into powerful digital solutions. From concept
+              to deployment, we build the future — one project at a time.
+            </p>
+            <div class="footer-social">
+              <a href="#" aria-label="Twitter">𝕏</a>
+              <a href="#" aria-label="LinkedIn">in</a>
+              <a href="#" aria-label="GitHub">⌘</a>
+              <a href="#" aria-label="Instagram">◎</a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/#services">Services</a></li>
+              <li><a href="/#about">About Us</a></li>
+              <li><a href="/#contact">Contact</a></li>
+              <li><a href="/submit">Submit Project</a></li>
+            </ul>
+          </div>
+
+          <!-- Services -->
+          <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="/#services">Web Development</a></li>
+              <li><a href="/#services">App Development</a></li>
+              <li><a href="/#services">AI Projects</a></li>
+              <li><a href="/#services">Hardware Projects</a></li>
+              <li><a href="/#services">Video Editing</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+              <li>
+                <a href="mailto:hello@alphaxheros.com">hello@alphaxheros.com</a>
+              </li>
+              <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+              <li><a href="#">Chennai, India</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2024 AlphaX Heros. All rights reserved.</p>
+          <a href="/admin/login" class="text-xs-muted">Admin Portal</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to Top">
+      <svg
+        width="20"
+        height="20"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 10l7-7m0 0l7 7m-7-7v18"
+        />
+      </svg>
+    </button>
+
+    <!-- Motion Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Interactivity -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>
